@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#080b12">
+
+    <title>VOID CHESS | VOID ARCADE</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="game-shell">
+
+        <header class="topbar">
+            <a class="back-link" href="../../../index.html">
+                ← VOID ARCADE
+            </a>
+            <div class="brand">VOID <span>CHESS</span></div>
+            <button id="sound-button" class="small-button"
+                    aria-label="Toggle sound">🔊</button>
+        </header>
+
+        <section class="intro">
+            <p class="eyebrow">STRATEGY SYSTEM // 001</p>
+            <h1>COMMAND THE <span>BOARD</span></h1>
+            <p class="subtitle">
+                Think ahead. Protect your king. Control the void.
+            </p>
+        </section>
+
+        <section class="setup panel" id="setup-panel">
+            <h2>NEW MATCH</h2>
+
+            <label for="mode-select">GAME MODE</label>
+            <select id="mode-select">
+                <option value="computer">Player vs Computer</option>
+                <option value="friend">Two Players · Same Device</option>
+            </select>
+
+            <div id="computer-options">
+                <label for="color-select">YOUR SIDE</label>
+                <select id="color-select">
+                    <option value="w">White</option>
+                    <option value="b">Black</option>
+                </select>
+
+                <label for="difficulty-select">COMPUTER LEVEL</label>
+                <select id="difficulty-select">
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+
+            <button id="start-button" class="primary-button">
+                START MATCH
+            </button>
+        </section>
+
+        <section id="game-panel" class="game-layout" hidden>
+            <div class="board-column">
+
+                <div class="player-strip panel">
+                    <div class="player-icon">♚</div>
+                    <div>
+                        <strong id="opponent-name">BLACK</strong>
+                        <small id="opponent-label">OPPONENT</small>
+                    </div>
+                    <span id="opponent-captured"
+                          class="captured"></span>
+                </div>
+
+                <div id="chessboard" class="chessboard"
+                     aria-label="Chessboard"></div>
+
+                <div class="player-strip panel">
+                    <div class="player-icon">♔</div>
+                    <div>
+                        <strong id="player-name">WHITE</strong>
+                        <small id="player-label">YOU</small>
+                    </div>
+                    <span id="player-captured"
+                          class="captured"></span>
+                </div>
+
+                <div class="status-panel panel">
+                    <span id="status-light" class="status-light"></span>
+                    <div>
+                        <strong id="game-status">SYSTEM READY</strong>
+                        <p id="status-detail">Waiting for first move.</p>
+                    </div>
+                </div>
+
+                <div class="game-controls">
+                    <button id="new-game-button" class="secondary-button">
+                        NEW MATCH
+                    </button>
+                    <button id="flip-button" class="secondary-button">
+                        FLIP BOARD
+                    </button>
+                    <button id="undo-button" class="secondary-button">
+                        UNDO
+                    </button>
+                </div>
+            </div>
+
+            <aside class="side-column">
+                <div class="panel">
+                    <h2>MOVE LOG</h2>
+                    <div id="move-history" class="move-history">
+                        <p class="muted">Moves will appear here.</p>
+                    </div>
+                </div>
+
+                <div class="panel tip-panel">
+                    <p class="eyebrow">TACTICAL DISPLAY</p>
+                    <p>
+                        Select a piece to reveal its legal moves.
+                        Choose a highlighted square to move.
+                    </p>
+                </div>
+            </aside>
+        </section>
+
+        <footer>
+            <span>VOID ARCADE</span>
+            <span>THINK BEYOND THE BOARD</span>
+        </footer>
+    </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>

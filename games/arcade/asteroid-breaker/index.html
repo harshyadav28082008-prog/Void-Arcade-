@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="theme-color" content="#090b12">
+  <meta name="description" content="Pilot your ship, destroy asteroids, and survive the deep-space arcade challenge in Asteroid Breaker.">
+
+  <title>Asteroid Breaker | VOID ARCADE</title>
+
+  <link rel="stylesheet" href="../../../common/css/style.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="game.js" defer></script>
+</head>
+
+<body class="asteroid-page">
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="VOID ARCADE home">
+      <span class="brand-symbol">V</span>
+      <span>VOID <b>ARCADE</b></span>
+    </a>
+
+    <nav class="main-nav">
+      <a href="../../../index.html">Home</a>
+      <a href="../../index.html#library">Game Library</a>
+      <a href="../../../about/index.html">About</a>
+    </nav>
+
+    <a class="header-play" href="../../index.html#library">All Games ↗</a>
+  </header>
+
+  <main class="asteroid-main">
+    <section class="game-intro">
+      <span class="eyebrow">VOID ARCADE ORIGINAL · ARCADE</span>
+      <h1>ASTEROID <span>BREAKER</span></h1>
+      <p>
+        The sector is collapsing. Keep your ship moving, destroy incoming
+        asteroids, and see how long you can survive.
+      </p>
+    </section>
+
+    <section class="game-layout" aria-label="Asteroid Breaker game">
+      <div class="game-machine">
+        <div class="machine-top">
+          <span class="machine-label">
+            <span class="live-dot"></span> DEEP SPACE SECTOR
+          </span>
+          <span class="machine-version">AB-01</span>
+        </div>
+
+        <div class="game-hud">
+          <div class="hud-item">
+            <span class="hud-label">SCORE</span>
+            <strong id="score">000000</strong>
+          </div>
+          <div class="hud-item">
+            <span class="hud-label">BEST</span>
+            <strong id="high-score">000000</strong>
+          </div>
+          <div class="hud-item hud-lives">
+            <span class="hud-label">HULL</span>
+            <strong id="lives">♥ ♥ ♥</strong>
+          </div>
+        </div>
+
+        <div class="canvas-wrap">
+          <canvas
+            id="game-canvas"
+            width="480"
+            height="640"
+            aria-label="Asteroid Breaker. Move your ship, shoot asteroids, and survive."
+          ></canvas>
+
+          <div id="game-overlay" class="game-overlay">
+            <div class="overlay-panel">
+              <span class="overlay-kicker">SIGNAL DETECTED</span>
+              <h2 id="overlay-title">READY, PILOT?</h2>
+              <p id="overlay-message">
+                Enter the asteroid field. Destroy asteroids and survive
+                for as long as possible.
+              </p>
+              <button id="start-button" class="start-button" type="button">
+                START MISSION <span>▶</span>
+              </button>
+              <span class="overlay-hint">BEST SCORE SAVED LOCALLY</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mobile-controls" aria-label="Touch controls">
+          <button class="control-button move-button" data-control="left"
+            type="button" aria-label="Move left">◀</button>
+          <button class="control-button move-button" data-control="right"
+            type="button" aria-label="Move right">▶</button>
+          <button class="control-button fire-button" data-control="fire"
+            type="button" aria-label="Fire weapon">FIRE <span>✦</span></button>
+        </div>
+
+        <div class="machine-bottom">
+          <span>VOID ARCADE SYSTEMS</span>
+          <span>NO ESCAPE · JUST SURVIVE</span>
+        </div>
+      </div>
+
+      <aside class="game-sidebar">
+        <div class="info-panel">
+          <span class="eyebrow">MISSION BRIEFING</span>
+          <h2>Survive the field.</h2>
+          <p>
+            Asteroids are closing in. Shoot them for points, avoid collisions,
+            and stay alive as the field becomes more dangerous.
+          </p>
+        </div>
+
+        <div class="info-panel">
+          <span class="eyebrow">CONTROLS</span>
+          <h3>Keyboard</h3>
+          <div class="key-row">
+            <span>Move left</span>
+            <kbd>A</kbd><kbd>←</kbd>
+          </div>
+          <div class="key-row">
+            <span>Move right</span>
+            <kbd>D</kbd><kbd>→</kbd>
+          </div>
+          <div class="key-row">
+            <span>Fire weapon</span>
+            <kbd>SPACE</kbd>
+          </div>
+          <h3 class="touch-heading">Mobile</h3>
+          <p>Hold the left and right arrows to steer. Hold FIRE to shoot.</p>
+        </div>
+
+        <div class="info-panel">
+          <span class="eyebrow">SCORING</span>
+          <div class="score-rule">
+            <span class="score-pixel">✦</span>
+            <div><strong>+10 points</strong><span>Asteroid destroyed</span></div>
+          </div>
+          <div class="score-rule">
+            <span class="score-pixel">↑</span>
+            <div><strong>More danger</strong><span>Difficulty increases over time</span></div>
+          </div>
+        </div>
+
+        <a class="back-link" href="../../index.html#library">
+          ← Return to game library
+        </a>
+      </aside>
+    </section>
+
+    <section class="game-footer-note">
+      <span class="live-dot"></span>
+      <p>Your best score is saved in this browser on this device.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="brand" href="../../index.html">
+      <span class="brand-symbol">V</span>
+      <span>VOID <b>ARCADE</b></span>
+    </a>
+    <p>Enter the unknown. Play your own way.</p>
+    <span>© <span id="footer-year"></span> VOID ARCADE</span>
+  </footer>
+</body>
+</html>

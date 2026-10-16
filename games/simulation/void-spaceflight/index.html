@@ -1,0 +1,198 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#050914">
+    <title>VOID SPACEFLIGHT | VOID ARCADE</title>
+    <link rel="stylesheet" href="../../common/common.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main id="game">
+
+    <section id="menu-screen" class="screen active">
+        <header class="brand">
+            <div class="brand-logo">V</div>
+            <div>
+                <h1>VOID SPACEFLIGHT</h1>
+                <p>YOUR MISSION. YOUR ROCKET. YOUR DESTINATION.</p>
+            </div>
+        </header>
+
+        <div class="menu-layout">
+            <div class="menu-intro">
+                <span class="eyebrow">FLIGHT PROGRAM // 001</span>
+                <h2>Beyond<br><span>the Horizon.</span></h2>
+                <p>
+                    Choose your spacecraft, plot your destination,
+                    and fly your own mission through the solar system.
+                </p>
+                <div class="feature-list">
+                    <span>◈ LIVE FLIGHT GUIDANCE</span>
+                    <span>◈ ROCKET CONTROL</span>
+                    <span>◈ PLANETARY LANDINGS</span>
+                </div>
+            </div>
+
+            <div class="selection-panel">
+                <h2>Mission Configuration</h2>
+
+                <label for="rocket-select">SELECT SPACECRAFT</label>
+                <select id="rocket-select"></select>
+
+                <div id="rocket-info" class="info-panel"></div>
+
+                <label for="destination-select">DESTINATION</label>
+                <select id="destination-select"></select>
+
+                <div id="destination-info" class="info-panel"></div>
+
+                <button id="launch-button" class="primary-button">
+                    INITIATE LAUNCH <span>↗</span>
+                </button>
+
+                <p class="small-note">
+                    Guidance is available throughout the mission.
+                    Flight outcomes depend on your controls.
+                </p>
+            </div>
+        </div>
+
+        <footer class="menu-footer">
+            <span>VOID ARCADE</span>
+            <span id="career-stat">MISSIONS COMPLETED: 0</span>
+        </footer>
+    </section>
+
+    <section id="flight-screen" class="screen">
+        <canvas id="space-canvas"></canvas>
+
+        <header class="flight-topbar">
+            <button id="exit-button" class="hud-button">← MENU</button>
+            <div class="flight-brand">
+                <strong>VOID SPACEFLIGHT</strong>
+                <span id="phase-label">PRE-LAUNCH</span>
+            </div>
+            <button id="pause-button" class="hud-button">Ⅱ PAUSE</button>
+        </header>
+
+        <div class="flight-hud">
+            <div class="hud-card">
+                <span>ALTITUDE</span>
+                <strong id="hud-altitude">0.0 km</strong>
+            </div>
+            <div class="hud-card">
+                <span>VELOCITY</span>
+                <strong id="hud-speed">0 m/s</strong>
+            </div>
+            <div class="hud-card">
+                <span>FUEL</span>
+                <strong id="hud-fuel">100%</strong>
+                <div class="meter"><i id="fuel-meter"></i></div>
+            </div>
+            <div class="hud-card">
+                <span>HULL INTEGRITY</span>
+                <strong id="hud-hull">100%</strong>
+                <div class="meter"><i id="hull-meter"></i></div>
+            </div>
+        </div>
+
+        <div class="navigation-card">
+            <div class="card-heading">
+                <span>FLIGHT TELEMETRY</span>
+                <span class="live-dot">● LIVE</span>
+            </div>
+            <div class="telemetry-row">
+                <span>Pitch angle</span>
+                <strong id="hud-pitch">90°</strong>
+            </div>
+            <div class="telemetry-row">
+                <span>Target angle</span>
+                <strong id="hud-target-pitch">90°</strong>
+            </div>
+            <div class="telemetry-row">
+                <span>Throttle</span>
+                <strong id="hud-throttle">100%</strong>
+            </div>
+            <div class="telemetry-row">
+                <span>Target speed</span>
+                <strong id="hud-target-speed">—</strong>
+            </div>
+            <div class="telemetry-row">
+                <span>Destination</span>
+                <strong id="hud-destination">Moon</strong>
+            </div>
+        </div>
+
+        <div class="guidance-card">
+            <div class="card-heading">
+                <span>MISSION GUIDANCE COMPUTER</span>
+                <span id="guidance-status">ACTIVE</span>
+            </div>
+            <h2 id="guidance-title">Preparing launch</h2>
+            <p id="guidance-message">Waiting for flight data.</p>
+            <div class="guidance-next">
+                <span>NEXT ACTION</span>
+                <strong id="guidance-action">Check your controls</strong>
+            </div>
+        </div>
+
+        <div class="flight-controls">
+            <div class="pitch-controls">
+                <span>PITCH CONTROL</span>
+                <div class="control-row">
+                    <button id="pitch-down" class="control-button">↙ LOWER</button>
+                    <button id="pitch-up" class="control-button">↗ RAISE</button>
+                </div>
+            </div>
+
+            <div class="throttle-controls">
+                <div class="throttle-heading">
+                    <label for="throttle-slider">ENGINE THROTTLE</label>
+                    <strong id="throttle-value">100%</strong>
+                </div>
+                <input id="throttle-slider" type="range"
+                    min="0" max="100" value="100">
+                <div class="throttle-labels">
+                    <span>0%</span>
+                    <span>MAX THRUST</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="pause-overlay" class="overlay hidden">
+            <div class="overlay-panel">
+                <h2>MISSION PAUSED</h2>
+                <p>Your flight is on hold.</p>
+                <button id="resume-button" class="primary-button">RESUME FLIGHT</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="result-screen" class="screen">
+        <div class="result-panel">
+            <span class="eyebrow">MISSION REPORT</span>
+            <h2 id="result-title">Mission Complete</h2>
+            <p id="result-message"></p>
+
+            <div class="result-stats">
+                <div><span>DESTINATION</span><strong id="result-destination">—</strong></div>
+                <div><span>FINAL ALTITUDE</span><strong id="result-altitude">—</strong></div>
+                <div><span>FUEL REMAINING</span><strong id="result-fuel">—</strong></div>
+                <div><span>HULL INTEGRITY</span><strong id="result-hull">—</strong></div>
+            </div>
+
+            <button id="retry-button" class="primary-button">FLY AGAIN</button>
+            <button id="return-button" class="secondary-button">RETURN TO MISSION CONTROL</button>
+        </div>
+    </section>
+
+</main>
+
+<script src="../../common/sound.js"></script>
+<script src="../../common/storage.js"></script>
+<script src="game.js"></script>
+</body>
+</html>

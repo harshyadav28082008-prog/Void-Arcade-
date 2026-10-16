@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080b14">
+  <meta name="description" content="Learn about VOID ARCADE, a home for browser games, interactive stories, and imaginative worlds.">
+  <title>About | VOID ARCADE</title>
+  <link rel="stylesheet" href="../common/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../index.html" aria-label="VOID ARCADE home">
+      <span class="brand-symbol">V</span>
+      <span>VOID <b>ARCADE</b></span>
+    </a>
+
+    <nav class="main-nav">
+      <a href="../index.html">Home</a>
+      <a href="../index.html#library">Game Library</a>
+      <a class="active" href="index.html">About</a>
+    </nav>
+
+    <a class="header-play" href="../index.html#library">Explore Games ↗</a>
+  </header>
+
+  <main>
+    <section class="about-hero">
+      <span class="eyebrow">ABOUT THE PLATFORM</span>
+      <h1>Not just games.<br><span>Entire worlds.</span></h1>
+      <p>
+        VOID ARCADE is a growing browser-gaming platform built to bring
+        different kinds of play together—from quick arcade challenges
+        to interactive stories and imaginative fictional worlds.
+      </p>
+      <a class="button button-primary" href="../index.html#library">
+        Explore the Library <span>↗</span>
+      </a>
+    </section>
+
+    <section class="about-content">
+      <span class="eyebrow">WHY VOID ARCADE?</span>
+      <h2>One portal, different adventures.</h2>
+      <p>
+        Some players want a quick challenge. Others want to explore a
+        fantasy world, experience a story, or step into a game inspired
+        by a novel. VOID ARCADE is designed to give each kind of player
+        a place to discover something new.
+      </p>
+
+      <div class="purpose-grid">
+        <article class="purpose-card">
+          <span class="purpose-icon">▣</span>
+          <h3>Novel-Based Games</h3>
+          <p>
+            Discover game experiences connected to fictional novels.
+            Each novel can have its own dedicated game hub and related games.
+          </p>
+        </article>
+
+        <article class="purpose-card">
+          <span class="purpose-icon">✧</span>
+          <h3>Fantasy-Based Games</h3>
+          <p>
+            Explore magical settings, unfamiliar lands, adventures,
+            and worlds built around imagination.
+          </p>
+        </article>
+
+        <article class="purpose-card">
+          <span class="purpose-icon">⌁</span>
+          <h3>Arcade Games</h3>
+          <p>
+            Jump into focused challenges designed for quick play,
+            replayability, and personal high scores.
+          </p>
+        </article>
+
+        <article class="purpose-card">
+          <span class="purpose-icon">◇</span>
+          <h3>Interactive Stories</h3>
+          <p>
+            Experience narratives where choices can shape events,
+            characters, and the direction of a story.
+          </p>
+        </article>
+      </div>
+
+      <div class="about-callout">
+        <p>
+          <strong>Our approach:</strong> Build one platform while keeping
+          every game independently organized. Each game can have its own
+          code, assets, rules, and identity, with shared resources used
+          where they make sense.
+        </p>
+      </div>
+
+      <div style="margin-top: 55px;">
+        <span class="eyebrow">THE JOURNEY STARTS HERE</span>
+        <h2>Find your next world.</h2>
+        <p>
+          VOID ARCADE is a work in progress. New games and experiences
+          will be introduced as they are developed.
+        </p>
+        <a class="text-link" href="../index.html#library">Return to the game library ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="brand" href="../index.html">
+      <span class="brand-symbol">V</span>
+      <span>VOID <b>ARCADE</b></span>
+    </a>
+    <p>Enter the unknown. Play your own way.</p>
+    <span>© <span id="footer-year"></span> VOID ARCADE</span>
+  </footer>
+
+  <script>
+    const year = document.getElementById("footer-year");
+    if (year) year.textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

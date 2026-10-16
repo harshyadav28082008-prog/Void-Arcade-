@@ -1,0 +1,377 @@
+
+:root {
+    color-scheme: dark;
+    --bg: #070b16;
+    --panel: #0d1426;
+    --line: rgba(126, 165, 255, 0.18);
+    --cyan: #68e4ff;
+    --blue: #5485ff;
+    --text: #eef4ff;
+    --muted: #8392ad;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+    background: var(--bg);
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 18px;
+    background:
+        radial-gradient(ellipse at 50% 0%,
+            #142449 0%, transparent 55%),
+        var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+button {
+    font: inherit;
+}
+
+.game-shell {
+    width: min(100%, 1000px);
+    margin: 0 auto;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 14px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.brand-mark {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid rgba(104, 228, 255, 0.4);
+    border-radius: 13px;
+    color: var(--cyan);
+    background: rgba(104, 228, 255, 0.08);
+    font-size: 25px;
+}
+
+.brand h1 {
+    margin: 0;
+    font-size: clamp(16px, 3vw, 23px);
+    letter-spacing: 0.13em;
+}
+
+.brand p {
+    margin: 4px 0 0;
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+}
+
+.scoreboard {
+    display: flex;
+    gap: 8px;
+}
+
+.score-box {
+    min-width: 70px;
+    padding: 8px 12px;
+    text-align: center;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: rgba(13, 20, 38, 0.9);
+}
+
+.score-box span {
+    display: block;
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+}
+
+.score-box strong {
+    display: block;
+    margin-top: 3px;
+    font-size: 20px;
+    font-variant-numeric: tabular-nums;
+}
+
+.game-frame {
+    position: relative;
+    width: 100%;
+    height: clamp(360px, 65vh, 680px);
+    overflow: hidden;
+    border: 1px solid rgba(104, 228, 255, 0.28);
+    border-radius: 15px;
+    background: #080e1d;
+    box-shadow: 0 15px 60px rgba(0, 0, 0, 0.3);
+    isolation: isolate;
+}
+
+#gameCanvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    background: rgba(5, 9, 21, 0.72);
+    backdrop-filter: blur(5px);
+}
+
+.overlay.hidden {
+    display: none;
+}
+
+.overlay-card {
+    width: min(100%, 390px);
+    padding: 26px 22px;
+    text-align: center;
+    border: 1px solid var(--line);
+    border-radius: 17px;
+    background: rgba(11, 18, 35, 0.94);
+    box-shadow: 0 0 50px rgba(50, 112, 255, 0.08);
+}
+
+.orbit-icon {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 18px;
+    border: 1px solid rgba(104, 228, 255, 0.4);
+    border-radius: 50%;
+    color: var(--cyan);
+    font-size: 28px;
+    box-shadow: 0 0 28px rgba(104, 228, 255, 0.1);
+}
+
+.eyebrow {
+    color: var(--cyan);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+}
+
+.overlay-card h2 {
+    margin: 12px 0;
+    font-size: clamp(22px, 5vw, 32px);
+    letter-spacing: 0.05em;
+}
+
+.overlay-card > p:not(.eyebrow):not(.hint) {
+    max-width: 290px;
+    margin: 0 auto 22px;
+    color: #aab8d2;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+#startButton {
+    width: 100%;
+    padding: 14px;
+    border: 0;
+    border-radius: 9px;
+    color: #06101b;
+    background: linear-gradient(100deg, #68e4ff, #7da3ff);
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+#startButton:active {
+    transform: scale(0.98);
+}
+
+.hint {
+    margin: 17px 0 0;
+    color: #7788a6;
+    font-size: 9px;
+    line-height: 1.7;
+    letter-spacing: 0.1em;
+}
+
+.game-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 13px 3px;
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+}
+
+.status-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin-right: 5px;
+    border-radius: 50%;
+    background: #6dffbd;
+    box-shadow: 0 0 8px #6dffbd;
+}
+
+.mobile-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+    margin-top: 8px;
+    padding: 14px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: rgba(13, 20, 38, 0.75);
+}
+
+.control-caption {
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+}
+
+.dpad {
+    display: grid;
+    grid-template-columns: repeat(3, 54px);
+    grid-template-rows: repeat(2, 48px);
+    gap: 5px;
+}
+
+.direction {
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(104, 228, 255, 0.25);
+    border-radius: 10px;
+    color: var(--cyan);
+    background: #111e35;
+    font-size: 18px;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.direction:active,
+.direction.pressed {
+    color: #07101d;
+    background: var(--cyan);
+}
+
+.direction.up {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.direction.left {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.direction.down {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.direction.right {
+    grid-column: 3;
+    grid-row: 2;
+}
+
+.mobile-controls > p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+@media (min-width: 760px) and (pointer: fine) {
+    .mobile-controls {
+        max-width: 320px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .topbar {
+        gap: 8px;
+    }
+
+    .brand {
+        gap: 7px;
+    }
+
+    .brand-mark {
+        width: 34px;
+        height: 34px;
+    }
+
+    .brand h1 {
+        letter-spacing: 0.06em;
+    }
+
+    .brand p {
+        font-size: 8px;
+        letter-spacing: 0.1em;
+    }
+
+    .score-box {
+        min-width: 54px;
+        padding: 7px 8px;
+    }
+
+    .score-box strong {
+        font-size: 17px;
+    }
+
+    .game-frame {
+        height: 55vh;
+        min-height: 350px;
+        max-height: 600px;
+    }
+
+    .game-footer {
+        font-size: 8px;
+        letter-spacing: 0.04em;
+    }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+    body {
+        padding: 6px 12px;
+    }
+
+    .topbar {
+        margin-bottom: 6px;
+    }
+
+    .game-frame {
+        height: 65vh;
+        min-height: 230px;
+    }
+
+    .mobile-controls {
+        padding: 6px;
+    }
+}

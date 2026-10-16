@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0,
+                   maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#070b16">
+
+    <title>VOID RUNNER</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="game.js" defer></script>
+</head>
+<body>
+    <main class="game-shell">
+        <header class="topbar">
+            <div class="brand">
+                <span class="brand-mark">✦</span>
+                <div>
+                    <h1>VOID RUNNER</h1>
+                    <p>DEEP SPACE SURVIVAL</p>
+                </div>
+            </div>
+
+            <div class="scoreboard">
+                <div class="score-box">
+                    <span>SCORE</span>
+                    <strong id="score">0</strong>
+                </div>
+                <div class="score-box">
+                    <span>BEST</span>
+                    <strong id="best">0</strong>
+                </div>
+            </div>
+        </header>
+
+        <section class="game-frame">
+            <canvas id="gameCanvas"
+                    aria-label="VOID RUNNER game area">
+            </canvas>
+
+            <div class="overlay" id="overlay">
+                <div class="overlay-card">
+                    <div class="orbit-icon">✦</div>
+
+                    <p class="eyebrow" id="overlayEyebrow">
+                        UNKNOWN SPACE
+                    </p>
+
+                    <h2 id="overlayTitle">ENTER THE VOID</h2>
+
+                    <p id="overlayText">
+                        Navigate the asteroid field.
+                        Survive as long as you can.
+                    </p>
+
+                    <button id="startButton">
+                        START RUN
+                    </button>
+
+                    <p class="hint" id="overlayHint">
+                        WASD / ARROW KEYS OR TOUCH CONTROLS
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="game-footer">
+            <span><i class="status-dot"></i> SYSTEM ONLINE</span>
+            <span>DODGE. SURVIVE. REPEAT.</span>
+        </footer>
+
+        <section class="mobile-controls"
+                 aria-label="Touch movement controls">
+            <div class="control-caption">
+                TOUCH CONTROLS
+            </div>
+
+            <div class="dpad">
+                <button class="direction up"
+                        data-direction="up"
+                        aria-label="Move up">▲</button>
+
+                <button class="direction left"
+                        data-direction="left"
+                        aria-label="Move left">◀</button>
+
+                <button class="direction down"
+                        data-direction="down"
+                        aria-label="Move down">▼</button>
+
+                <button class="direction right"
+                        data-direction="right"
+                        aria-label="Move right">▶</button>
+            </div>
+
+            <p>Hold a direction to move</p>
+        </section>
+    </main>
+</body>
+</html>

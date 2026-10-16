@@ -1,0 +1,572 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    background: #030712;
+
+    touch-action: none;
+
+    overscroll-behavior: none;
+
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+body {
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+}
+
+button {
+    font: inherit;
+}
+
+#game {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100vw;
+    height: 100dvh;
+
+    overflow: hidden;
+
+    background: #030712;
+}
+
+#game-canvas {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    touch-action: none;
+}
+
+
+/* =========================================================
+   HUD
+   ========================================================= */
+
+.hud {
+    position: absolute;
+
+    top: max(14px, env(safe-area-inset-top));
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: min(720px, calc(100% - 24px));
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 8px;
+
+    z-index: 10;
+
+    pointer-events: none;
+}
+
+.hud-box {
+    padding: 8px 10px;
+
+    border: 1px solid
+        rgba(117, 229, 210, .18);
+
+    background:
+        rgba(4, 10, 20, .68);
+
+    backdrop-filter: blur(8px);
+
+    text-align: center;
+
+    color: #fff;
+}
+
+.hud-box span {
+    display: block;
+
+    font-size: 9px;
+
+    letter-spacing: 1.5px;
+
+    color: #78919d;
+}
+
+.hud-box strong {
+    font-size: 18px;
+
+    color: #75e5d2;
+}
+
+.hud-box small {
+    font-size: 9px;
+
+    color: #78919d;
+}
+
+
+/* =========================================================
+   DURABILITY
+   ========================================================= */
+
+.durability {
+    position: absolute;
+
+    top: 83px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: min(400px, calc(100% - 40px));
+
+    z-index: 10;
+
+    pointer-events: none;
+}
+
+.durability-label {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 5px;
+
+    font-size: 9px;
+
+    letter-spacing: 1px;
+
+    color: #78919d;
+}
+
+.durability-label span {
+    color: #75e5d2;
+}
+
+.durability-bar {
+    height: 5px;
+
+    background:
+        rgba(255, 255, 255, .08);
+
+    overflow: hidden;
+}
+
+#durability-fill {
+    width: 100%;
+    height: 100%;
+
+    background: #75e5d2;
+
+    transition:
+        width .15s linear;
+}
+
+
+/* =========================================================
+   POWER DISPLAY
+   ========================================================= */
+
+#power-display {
+    position: absolute;
+
+    top: 108px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    z-index: 10;
+
+    color: #fff;
+
+    font-size: 11px;
+
+    letter-spacing: 1px;
+
+    text-align: center;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   SCREENS
+   ========================================================= */
+
+.screen {
+    position: absolute;
+
+    inset: 0;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    z-index: 50;
+
+    padding:
+        20px
+        max(20px, env(safe-area-inset-right))
+        max(20px, env(safe-area-inset-bottom))
+        max(20px, env(safe-area-inset-left));
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(9, 30, 42, .55),
+            rgba(2, 5, 12, .9)
+        );
+}
+
+.screen.active {
+    display: flex;
+}
+
+.screen-card {
+    width: min(480px, 100%);
+
+    padding: 34px 25px;
+
+    border:
+        1px solid
+        rgba(117, 229, 210, .22);
+
+    background:
+        rgba(3, 9, 18, .88);
+
+    box-shadow:
+        0 25px 80px
+        rgba(0, 0, 0, .55);
+
+    backdrop-filter: blur(14px);
+
+    text-align: center;
+}
+
+.eyebrow {
+    margin-bottom: 12px;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    color: #75e5d2;
+}
+
+.screen-card h1 {
+    margin-bottom: 16px;
+
+    font-size:
+        clamp(42px, 13vw, 78px);
+
+    line-height: .85;
+
+    letter-spacing: -3px;
+
+    color: #f1ffff;
+}
+
+.screen-card h1 span {
+    color: #75e5d2;
+}
+
+.screen-card p {
+    max-width: 380px;
+
+    margin: 0 auto 24px;
+
+    line-height: 1.6;
+
+    font-size: 13px;
+
+    color: #91a7b2;
+}
+
+
+/* =========================================================
+   CONTROLS INFO
+   ========================================================= */
+
+.controls-info {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 20px;
+
+    margin-bottom: 25px;
+}
+
+.controls-info div {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.controls-info b {
+    color: #fff;
+    font-size: 16px;
+}
+
+.controls-info span {
+    font-size: 8px;
+
+    letter-spacing: 1px;
+
+    color: #607681;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.main-button,
+.secondary-button {
+    width: 100%;
+
+    min-height: 50px;
+
+    border: none;
+
+    cursor: pointer;
+
+    touch-action: manipulation;
+}
+
+.main-button {
+    background: #75e5d2;
+
+    color: #031014;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+    box-shadow:
+        0 0 30px
+        rgba(117, 229, 210, .15);
+}
+
+.main-button:active {
+    transform: scale(.98);
+}
+
+.secondary-button {
+    margin-top: 10px;
+
+    background:
+        rgba(255,255,255,.04);
+
+    border:
+        1px solid
+        rgba(255,255,255,.1);
+
+    color: #9db0b9;
+}
+
+.saved-info {
+    margin-top: 18px;
+
+    font-size: 9px;
+
+    letter-spacing: 1px;
+
+    color: #607681;
+}
+
+.saved-info strong {
+    color: #f5d48b;
+}
+
+
+/* =========================================================
+   RESULT
+   ========================================================= */
+
+.result-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 8px;
+
+    margin-bottom: 22px;
+}
+
+.result-grid div {
+    padding: 12px 5px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
+    background:
+        rgba(255,255,255,.025);
+}
+
+.result-grid span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+
+    color: #607681;
+}
+
+.result-grid strong {
+    color: #75e5d2;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   TOUCH CONTROLS
+   ========================================================= */
+
+.touch-controls {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    bottom:
+        max(20px, env(safe-area-inset-bottom));
+
+    display: flex;
+
+    justify-content: space-between;
+
+    padding:
+        0
+        max(20px, env(safe-area-inset-right))
+        0
+        max(20px, env(safe-area-inset-left));
+
+    z-index: 20;
+
+    pointer-events: none;
+}
+
+.touch-controls button {
+    width: 82px;
+    height: 82px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(117, 229, 210, .3);
+
+    background:
+        rgba(3, 12, 20, .68);
+
+    color: #75e5d2;
+
+    font-size: 28px;
+
+    pointer-events: auto;
+
+    touch-action: none;
+
+    backdrop-filter: blur(8px);
+}
+
+.touch-controls button:active,
+.touch-controls button.active {
+    background:
+        rgba(117, 229, 210, .2);
+
+    transform: scale(.94);
+}
+
+
+/* =========================================================
+   POWER LEGEND
+   ========================================================= */
+
+.power-legend {
+    position: absolute;
+
+    right: 14px;
+
+    bottom:
+        max(15px, env(safe-area-inset-bottom));
+
+    z-index: 10;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+
+    pointer-events: none;
+
+    font-size: 8px;
+
+    color: rgba(255,255,255,.45);
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .hud-box {
+        padding: 6px 4px;
+    }
+
+    .hud-box strong {
+        font-size: 15px;
+    }
+
+    .durability {
+        top: 76px;
+    }
+
+    #power-display {
+        top: 100px;
+    }
+
+    .screen-card {
+        padding: 28px 20px;
+    }
+
+    .touch-controls button {
+        width: 72px;
+        height: 72px;
+    }
+
+    .power-legend {
+        display: none;
+    }
+}

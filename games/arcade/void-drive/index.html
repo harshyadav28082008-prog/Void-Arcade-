@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width,
+        initial-scale=1.0,
+        maximum-scale=1.0,
+        user-scalable=no,
+        viewport-fit=cover"
+    >
+
+    <meta name="theme-color" content="#07090d">
+
+    <title>VOID DRIVE | VOID ARCADE</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="game">
+
+    <!-- ================= MENU ================= -->
+
+    <section id="main-menu" class="screen active">
+
+        <div class="menu-glow"></div>
+
+        <div class="menu-content">
+
+            <p class="eyebrow">VOID ARCADE</p>
+
+            <h1>VOID<br><span>DRIVE</span></h1>
+
+            <p class="subtitle">
+                DRIVE BEYOND THE FRONTIER
+            </p>
+
+            <div class="menu-buttons">
+
+                <button id="level-mode-btn" class="menu-button primary">
+                    <span>01</span>
+                    LEVEL MODE
+                </button>
+
+                <button id="endless-mode-btn" class="menu-button">
+                    <span>∞</span>
+                    ENDLESS DRIVE
+                </button>
+
+            </div>
+
+            <p class="menu-info">
+                25 LEVELS · PROCEDURAL ROADS · ARCADE DRIVING
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= LEVEL SELECT ================= -->
+
+    <section id="level-screen" class="screen">
+
+        <div class="top-bar">
+
+            <button id="level-back" class="small-button">
+                ← BACK
+            </button>
+
+            <div>
+                <p class="eyebrow">VOID DRIVE</p>
+                <h2>SELECT LEVEL</h2>
+            </div>
+
+        </div>
+
+        <div id="level-grid" class="level-grid"></div>
+
+    </section>
+
+
+    <!-- ================= GAME ================= -->
+
+    <section id="game-screen" class="screen">
+
+        <canvas id="drive-canvas"></canvas>
+
+        <!-- Top HUD -->
+
+        <div class="hud">
+
+            <div class="hud-box">
+
+                <span class="hud-label">MODE</span>
+
+                <strong id="mode-display">
+                    LEVEL 01
+                </strong>
+
+            </div>
+
+            <div class="hud-box distance-box">
+
+                <span class="hud-label">
+                    DISTANCE
+                </span>
+
+                <strong>
+                    <span id="distance">0</span> m
+                </strong>
+
+            </div>
+
+            <button id="pause-btn" class="pause-button">
+                II
+            </button>
+
+        </div>
+
+
+        <!-- Speed panel -->
+
+        <div class="speed-panel">
+
+            <span>SPEED</span>
+
+            <strong>
+                <span id="speed">0</span>
+            </strong>
+
+            <small>KM/H</small>
+
+            <div class="speed-bar">
+                <div id="speed-fill"></div>
+            </div>
+
+        </div>
+
+
+        <!-- Level progress -->
+
+        <div id="objective-panel" class="objective-panel">
+
+            <span id="objective-title">
+                DISTANCE
+            </span>
+
+            <strong id="objective-value">
+                0 / 1000 M
+            </strong>
+
+            <div class="objective-bar">
+                <div id="objective-fill"></div>
+            </div>
+
+        </div>
+
+
+        <!-- Mobile controls -->
+
+        <div id="mobile-controls">
+
+            <div class="steering">
+
+                <button
+                    class="control-button steer"
+                    data-control="left"
+                >
+                    ◀
+                </button>
+
+                <button
+                    class="control-button steer"
+                    data-control="right"
+                >
+                    ▶
+                </button>
+
+            </div>
+
+
+            <div class="pedals">
+
+                <button
+                    class="control-button accelerate"
+                    data-control="accelerate"
+                >
+                    ▲
+                    <small>GAS</small>
+                </button>
+
+                <button
+                    class="control-button brake"
+                    data-control="brake"
+                >
+                    ▼
+                    <small>BRAKE</small>
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- Desktop hint -->
+
+        <div class="keyboard-hint">
+            W / ↑ GAS &nbsp; · &nbsp;
+            S / ↓ BRAKE &nbsp; · &nbsp;
+            A D / ← → STEER
+        </div>
+
+
+        <!-- Pause -->
+
+        <div id="pause-panel" class="game-panel">
+
+            <p class="eyebrow">VOID DRIVE</p>
+
+            <h2>PAUSED</h2>
+
+            <button id="resume-btn" class="panel-button primary">
+                RESUME
+            </button>
+
+            <button id="quit-btn" class="panel-button">
+                QUIT DRIVE
+            </button>
+
+        </div>
+
+
+        <!-- Result -->
+
+        <div id="result-panel" class="game-panel">
+
+            <p id="result-eyebrow" class="eyebrow">
+                LEVEL COMPLETE
+            </p>
+
+            <h2 id="result-title">
+                ROAD CONQUERED
+            </h2>
+
+            <p id="result-text">
+                Mission complete.
+            </p>
+
+            <button id="result-main" class="panel-button primary">
+                CONTINUE
+            </button>
+
+            <button id="result-menu" class="panel-button">
+                MAIN MENU
+            </button>
+
+        </div>
+
+
+        <!-- Crash -->
+
+        <div id="crash-flash"></div>
+
+    </section>
+
+</div>
+
+<script src="game.js"></script>
+
+</body>
+</html>

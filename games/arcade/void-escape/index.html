@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    >
+
+    <meta
+        name="theme-color"
+        content="#030712"
+    >
+
+    <title>VOID ESCAPE | VOID ARCADE</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+</head>
+
+<body>
+
+    <main id="game">
+
+        <canvas id="game-canvas"></canvas>
+
+        <!-- TOP HUD -->
+
+        <section class="hud">
+
+            <div class="hud-box">
+                <span>DISTANCE</span>
+                <strong id="distance">0</strong>
+                <small>M</small>
+            </div>
+
+            <div class="hud-box">
+                <span>COINS</span>
+                <strong id="coins">0</strong>
+            </div>
+
+            <div class="hud-box">
+                <span>BEST</span>
+                <strong id="best">0</strong>
+                <small>M</small>
+            </div>
+
+        </section>
+
+
+        <!-- DURABILITY -->
+
+        <div class="durability">
+
+            <div class="durability-label">
+                SHIP DURABILITY
+                <span id="durability-text">100%</span>
+            </div>
+
+            <div class="durability-bar">
+                <div id="durability-fill"></div>
+            </div>
+
+        </div>
+
+
+        <!-- POWER UP DISPLAY -->
+
+        <div id="power-display"></div>
+
+
+        <!-- START SCREEN -->
+
+        <section
+            id="start-screen"
+            class="screen active"
+        >
+
+            <div class="screen-card">
+
+                <div class="eyebrow">
+                    VOID ARCADE / SPACE RUNNER
+                </div>
+
+                <h1>
+                    VOID<br>
+                    <span>ESCAPE</span>
+                </h1>
+
+                <p>
+                    Escape the pursuing enemy ship.
+                    Dodge asteroids, collect coins
+                    and survive as long as possible.
+                </p>
+
+                <div class="controls-info">
+
+                    <div>
+                        <b>← →</b>
+                        <span>CHANGE LANE</span>
+                    </div>
+
+                    <div>
+                        <b>TOUCH</b>
+                        <span>SWIPE / BUTTONS</span>
+                    </div>
+
+                </div>
+
+                <button
+                    id="start-button"
+                    class="main-button"
+                >
+                    START ESCAPE
+                </button>
+
+                <div class="saved-info">
+                    SAVED COINS:
+                    <strong id="saved-coins">0</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- GAME OVER -->
+
+        <section
+            id="game-over"
+            class="screen"
+        >
+
+            <div class="screen-card">
+
+                <div class="eyebrow">
+                    PURSUIT TERMINATED
+                </div>
+
+                <h1>
+                    GAME<br>
+                    <span>OVER</span>
+                </h1>
+
+                <div class="result-grid">
+
+                    <div>
+                        <span>DISTANCE</span>
+                        <strong id="final-distance">0 M</strong>
+                    </div>
+
+                    <div>
+                        <span>COINS</span>
+                        <strong id="final-coins">0</strong>
+                    </div>
+
+                    <div>
+                        <span>BEST</span>
+                        <strong id="final-best">0 M</strong>
+                    </div>
+
+                </div>
+
+                <button
+                    id="restart-button"
+                    class="main-button"
+                >
+                    ESCAPE AGAIN
+                </button>
+
+                <button
+                    id="menu-button"
+                    class="secondary-button"
+                >
+                    MAIN MENU
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- TOUCH CONTROLS -->
+
+        <div
+            id="touch-controls"
+            class="touch-controls"
+        >
+
+            <button
+                data-lane="left"
+                aria-label="Move left"
+            >
+                ◀
+            </button>
+
+            <button
+                data-lane="right"
+                aria-label="Move right"
+            >
+                ▶
+            </button>
+
+        </div>
+
+
+        <!-- POWER-UP LEGEND -->
+
+        <div class="power-legend">
+
+            <span>🧲 MAGNET</span>
+            <span>⚡ BOOST</span>
+            <span>🛡 SHIELD</span>
+
+        </div>
+
+    </main>
+
+    <script src="game.js"></script>
+
+</body>
+</html>

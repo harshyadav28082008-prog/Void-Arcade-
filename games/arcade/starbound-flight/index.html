@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050914">
+
+  <title>Starbound Flight | VOID ARCADE</title>
+  <meta name="description" content="Pilot through the stars, dodge space debris, and collect energy in Starbound Flight.">
+
+  <link rel="stylesheet" href="../../../common/css/style.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="game.js" defer></script>
+</head>
+
+<body class="starbound-page">
+  <header class="sf-header">
+    <a class="sf-logo" href="../../../index.html">VOID <span>ARCADE</span></a>
+    <nav>
+      <a href="../../../index.html">Home</a>
+      <a href="../../../about/index.html">About</a>
+    </nav>
+  </header>
+
+  <main class="sf-layout">
+    <section class="sf-intro">
+      <p class="sf-kicker">ARCADE DIVISION / FLIGHT SIMULATION</p>
+      <h1>STARB<span>OUND</span><br>FLIGHT</h1>
+      <p class="sf-subtitle">
+        The stars are calling. The void is waiting. How far can you fly?
+      </p>
+    </section>
+
+    <section class="sf-game-panel">
+      <div class="sf-hud">
+        <div>
+          <span class="sf-label">DISTANCE</span>
+          <strong id="sf-score">0</strong>
+        </div>
+        <div>
+          <span class="sf-label">ENERGY</span>
+          <strong id="sf-energy">0</strong>
+        </div>
+        <div>
+          <span class="sf-label">BEST FLIGHT</span>
+          <strong id="sf-best">0</strong>
+        </div>
+      </div>
+
+      <div class="sf-screen-wrap">
+        <canvas id="sf-canvas" width="480" height="640"
+          aria-label="Starbound Flight game area"></canvas>
+
+        <div class="sf-overlay" id="sf-overlay">
+          <p class="sf-overlay-tag" id="sf-overlay-tag">FLIGHT SYSTEM ONLINE</p>
+          <h2 id="sf-overlay-title">READY, PILOT?</h2>
+          <p id="sf-overlay-message">
+            Dodge debris and collect energy orbs. Stay in flight as long as you can.
+          </p>
+          <button id="sf-start" type="button">BEGIN FLIGHT</button>
+        </div>
+      </div>
+
+      <div class="sf-touch-controls">
+        <button type="button" data-move="left" aria-label="Move left">◀</button>
+        <button type="button" data-move="up" aria-label="Move up">▲</button>
+        <button type="button" data-move="down" aria-label="Move down">▼</button>
+        <button type="button" data-move="right" aria-label="Move right">▶</button>
+      </div>
+
+      <p class="sf-hint">
+        KEYBOARD: WASD / ARROW KEYS
+        <span>•</span>
+        MOBILE: USE THE DIRECTION PAD
+      </p>
+    </section>
+
+    <aside class="sf-info">
+      <div class="sf-info-card">
+        <span class="sf-number">01</span>
+        <h2>Navigate</h2>
+        <p>Move in four directions to avoid the incoming space debris.</p>
+      </div>
+      <div class="sf-info-card">
+        <span class="sf-number">02</span>
+        <h2>Collect</h2>
+        <p>Fly through glowing energy orbs to increase your energy score.</p>
+      </div>
+      <div class="sf-info-card">
+        <span class="sf-number">03</span>
+        <h2>Survive</h2>
+        <p>Your distance score grows while you remain in flight. One collision ends the run.</p>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="sf-footer">
+    <span>VOID ARCADE</span>
+    <span>EXPLORE BEYOND THE KNOWN</span>
+  </footer>
+</body>
+</html>

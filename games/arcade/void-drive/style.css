@@ -1,0 +1,793 @@
+:root {
+    color-scheme: dark;
+
+    --bg: #07090d;
+    --panel: rgba(9, 13, 20, 0.94);
+    --line: rgba(255,255,255,0.12);
+
+    --cyan: #63e6e0;
+    --blue: #69a9ff;
+    --red: #ff667d;
+    --yellow: #f5d27e;
+
+    --text: #eef7f7;
+    --muted: #809099;
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+
+    overflow: hidden;
+
+    background: var(--bg);
+    color: var(--text);
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    touch-action: none;
+
+    overscroll-behavior: none;
+}
+
+body {
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+button {
+    font: inherit;
+    color: inherit;
+}
+
+#game {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100vw;
+    height: 100dvh;
+
+    overflow: hidden;
+}
+
+
+/* ================= SCREENS ================= */
+
+.screen {
+    position: absolute;
+
+    inset: 0;
+
+    display: none;
+
+    overflow: hidden;
+}
+
+.screen.active {
+    display: block;
+}
+
+
+/* ================= MAIN MENU ================= */
+
+#main-menu {
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at 50% 40%,
+            rgba(70, 180, 180, 0.12),
+            transparent 45%
+        ),
+        #07090d;
+}
+
+#main-menu.active {
+    display: flex;
+}
+
+.menu-glow {
+    position: absolute;
+
+    width: 60vmin;
+    height: 60vmin;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(70,220,210,0.12),
+            transparent 65%
+        );
+
+    filter: blur(20px);
+}
+
+.menu-content {
+    position: relative;
+
+    width: min(520px, 90vw);
+
+    text-align: center;
+
+    padding: 30px;
+}
+
+.eyebrow {
+    margin: 0 0 8px;
+
+    color: var(--cyan);
+
+    font-size: 11px;
+    letter-spacing: 3px;
+    font-weight: 700;
+}
+
+.menu-content h1 {
+    margin: 0;
+
+    font-size: clamp(64px, 15vw, 120px);
+
+    line-height: 0.82;
+
+    letter-spacing: -6px;
+
+    font-weight: 900;
+}
+
+.menu-content h1 span {
+    color: var(--cyan);
+}
+
+.subtitle {
+    margin: 25px 0 35px;
+
+    color: var(--muted);
+
+    letter-spacing: 4px;
+
+    font-size: 11px;
+}
+
+.menu-buttons {
+    display: grid;
+
+    gap: 12px;
+}
+
+.menu-button {
+    width: 100%;
+
+    min-height: 70px;
+
+    border: 1px solid var(--line);
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,0.04),
+            rgba(255,255,255,0.01)
+        );
+
+    cursor: pointer;
+
+    text-align: left;
+
+    padding: 0 25px;
+
+    letter-spacing: 2px;
+
+    transition:
+        transform .15s,
+        border-color .15s,
+        background .15s;
+}
+
+.menu-button span {
+    display: inline-block;
+
+    width: 40px;
+
+    color: var(--cyan);
+
+    font-weight: 900;
+}
+
+.menu-button:hover,
+.menu-button:active {
+    transform: translateY(-2px);
+
+    border-color: var(--cyan);
+}
+
+.menu-button.primary {
+    background: rgba(99,230,224,0.1);
+
+    border-color: rgba(99,230,224,0.45);
+}
+
+.menu-info {
+    margin-top: 25px;
+
+    color: #4d5b62;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+}
+
+
+/* ================= LEVEL SELECT ================= */
+
+#level-screen {
+    padding: 25px;
+
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(70,180,180,0.08),
+            transparent 45%
+        ),
+        var(--bg);
+}
+
+.top-bar {
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    max-width: 900px;
+
+    margin: auto;
+}
+
+.top-bar h2 {
+    margin: 0;
+
+    font-size: 25px;
+}
+
+.small-button {
+    padding: 12px 15px;
+
+    background: rgba(255,255,255,0.04);
+
+    border: 1px solid var(--line);
+
+    cursor: pointer;
+}
+
+.level-grid {
+    width: min(900px, 100%);
+
+    margin: 30px auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(120px, 1fr));
+
+    gap: 12px;
+
+    max-height: calc(100dvh - 120px);
+
+    overflow-y: auto;
+
+    padding-bottom: 30px;
+}
+
+.level-card {
+    min-height: 105px;
+
+    background: rgba(255,255,255,0.035);
+
+    border: 1px solid var(--line);
+
+    cursor: pointer;
+
+    padding: 15px;
+
+    text-align: left;
+
+    transition: .15s;
+}
+
+.level-card:hover {
+    border-color: var(--cyan);
+
+    transform: translateY(-2px);
+}
+
+.level-card.locked {
+    opacity: .3;
+
+    cursor: not-allowed;
+}
+
+.level-number {
+    color: var(--cyan);
+
+    font-size: 25px;
+
+    font-weight: 900;
+}
+
+.level-name {
+    display: block;
+
+    margin-top: 8px;
+
+    font-size: 10px;
+
+    color: var(--muted);
+
+    letter-spacing: 1px;
+}
+
+
+/* ================= GAME ================= */
+
+#game-screen {
+    background: #08110d;
+}
+
+#drive-canvas {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+}
+
+
+/* ================= HUD ================= */
+
+.hud {
+    position: absolute;
+
+    top: env(safe-area-inset-top, 12px);
+    left: 12px;
+    right: 12px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 8px;
+
+    pointer-events: none;
+}
+
+.hud-box {
+    padding: 9px 12px;
+
+    background: rgba(5,8,10,.78);
+
+    border: 1px solid rgba(255,255,255,.1);
+
+    backdrop-filter: blur(5px);
+}
+
+.hud-label {
+    display: block;
+
+    color: #66767b;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+}
+
+.hud-box strong {
+    font-size: 14px;
+}
+
+.distance-box {
+    margin-left: auto;
+}
+
+.pause-button {
+    pointer-events: auto;
+
+    width: 42px;
+    height: 42px;
+
+    border: 1px solid rgba(255,255,255,.15);
+
+    background: rgba(5,8,10,.8);
+
+    cursor: pointer;
+}
+
+
+/* ================= SPEED ================= */
+
+.speed-panel {
+    position: absolute;
+
+    right: 16px;
+    bottom: 150px;
+
+    width: 100px;
+
+    padding: 14px;
+
+    background: rgba(5,8,10,.8);
+
+    border: 1px solid rgba(99,230,224,.2);
+
+    text-align: center;
+}
+
+.speed-panel span {
+    display: block;
+
+    color: #6c7c82;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+}
+
+.speed-panel strong {
+    display: inline-block;
+
+    margin-top: 3px;
+
+    font-size: 32px;
+
+    line-height: 1;
+}
+
+.speed-panel small {
+    color: var(--cyan);
+
+    font-size: 8px;
+}
+
+.speed-bar {
+    height: 4px;
+
+    margin-top: 10px;
+
+    background: rgba(255,255,255,.08);
+}
+
+#speed-fill {
+    width: 0;
+
+    height: 100%;
+
+    background: var(--cyan);
+
+    transition: width .1s;
+}
+
+
+/* ================= OBJECTIVE ================= */
+
+.objective-panel {
+    position: absolute;
+
+    top: 70px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: min(260px, 55vw);
+
+    padding: 7px 10px;
+
+    background: rgba(5,8,10,.72);
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    text-align: center;
+}
+
+.objective-panel span {
+    display: block;
+
+    font-size: 7px;
+
+    letter-spacing: 2px;
+
+    color: #637177;
+}
+
+.objective-panel strong {
+    font-size: 10px;
+}
+
+.objective-bar {
+    height: 3px;
+
+    margin-top: 5px;
+
+    background: rgba(255,255,255,.08);
+}
+
+#objective-fill {
+    width: 0;
+
+    height: 100%;
+
+    background: var(--cyan);
+}
+
+
+/* ================= MOBILE CONTROLS ================= */
+
+#mobile-controls {
+    position: absolute;
+
+    inset: auto 0 0 0;
+
+    height: 190px;
+
+    pointer-events: none;
+}
+
+.steering {
+    position: absolute;
+
+    left: 20px;
+    bottom: 22px;
+
+    display: flex;
+
+    gap: 8px;
+}
+
+.pedals {
+    position: absolute;
+
+    right: 20px;
+    bottom: 22px;
+
+    display: flex;
+
+    gap: 8px;
+}
+
+.control-button {
+    pointer-events: auto;
+
+    width: 68px;
+    height: 68px;
+
+    border-radius: 12px;
+
+    border: 1px solid rgba(255,255,255,.15);
+
+    background: rgba(7,12,15,.82);
+
+    backdrop-filter: blur(5px);
+
+    touch-action: none;
+
+    cursor: pointer;
+}
+
+.control-button:active,
+.control-button.active {
+    transform: scale(.94);
+
+    background: rgba(99,230,224,.18);
+
+    border-color: var(--cyan);
+}
+
+.control-button small {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #74858b;
+
+    font-size: 7px;
+
+    letter-spacing: 1px;
+}
+
+.brake {
+    border-color: rgba(255,102,125,.3);
+}
+
+.brake:active {
+    border-color: var(--red);
+    background: rgba(255,102,125,.14);
+}
+
+.keyboard-hint {
+    position: absolute;
+
+    bottom: 8px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    color: rgba(255,255,255,.3);
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+
+    white-space: nowrap;
+}
+
+
+/* ================= PANELS ================= */
+
+.game-panel {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: min(390px, 88vw);
+
+    padding: 35px;
+
+    background: rgba(7,10,15,.96);
+
+    border: 1px solid rgba(99,230,224,.3);
+
+    box-shadow:
+        0 25px 80px rgba(0,0,0,.7);
+
+    text-align: center;
+
+    display: none;
+
+    z-index: 20;
+}
+
+.game-panel.active {
+    display: block;
+}
+
+.game-panel h2 {
+    margin: 5px 0 15px;
+
+    font-size: 35px;
+
+    letter-spacing: -1px;
+}
+
+.game-panel p:not(.eyebrow) {
+    color: #89979b;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+.panel-button {
+    width: 100%;
+
+    min-height: 48px;
+
+    margin-top: 9px;
+
+    border: 1px solid var(--line);
+
+    background: rgba(255,255,255,.04);
+
+    cursor: pointer;
+}
+
+.panel-button.primary {
+    border-color: rgba(99,230,224,.5);
+
+    background: rgba(99,230,224,.1);
+}
+
+#crash-flash {
+    position: absolute;
+
+    inset: 0;
+
+    background: rgba(255,60,80,.2);
+
+    pointer-events: none;
+
+    opacity: 0;
+}
+
+#crash-flash.active {
+    animation: crash .25s;
+}
+
+@keyframes crash {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 650px) {
+
+    .keyboard-hint {
+        display: none;
+    }
+
+    .speed-panel {
+        right: 12px;
+        bottom: 175px;
+    }
+
+    #mobile-controls {
+        height: 180px;
+    }
+
+    .control-button {
+        width: 62px;
+        height: 62px;
+    }
+
+    .objective-panel {
+        top: 65px;
+    }
+
+}
+
+
+/* ================= LANDSCAPE PHONE ================= */
+
+@media (max-height: 500px) {
+
+    #mobile-controls {
+        height: 125px;
+    }
+
+    .steering,
+    .pedals {
+        bottom: 12px;
+    }
+
+    .control-button {
+        width: 55px;
+        height: 55px;
+    }
+
+    .speed-panel {
+        bottom: 100px;
+    }
+
+}
+
+
+/* Hide mobile controls when using a larger desktop display */
+
+@media (min-width: 900px) and (pointer: fine) {
+
+    #mobile-controls {
+        opacity: .35;
+    }
+
+}

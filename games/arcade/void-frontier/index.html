@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080d16">
+  <title>VOID FRONTIER | VOID ARCADE</title>
+  <meta name="description" content="Explore hostile space, fight drones, collect salvage, upgrade your ship and unlock new sectors in VOID FRONTIER.">
+  <link rel="stylesheet" href="../../../common/css/style.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="game.js" defer></script>
+</head>
+
+<body class="vf-page">
+  <header class="vf-header">
+    <a class="vf-brand" href="../../../index.html">
+      <span class="vf-brand-mark">V</span>
+      <span>VOID <b>FRONTIER</b><small>DEEP SPACE OPERATIONS</small></span>
+    </a>
+    <nav class="vf-nav">
+      <a href="../../../index.html">Arcade Home</a>
+      <span class="vf-online"><i></i> LOCAL SESSION</span>
+    </nav>
+  </header>
+
+  <main class="vf-main">
+    <section class="vf-heading">
+      <div>
+        <p class="vf-eyebrow">FRONTIER COMMAND / FLIGHT DIVISION</p>
+        <h1>Beyond the <span>known.</span></h1>
+        <p>Secure the frontier. Salvage what remains. Make every sector yours.</p>
+      </div>
+      <div class="vf-sector-chip">
+        <span>ACTIVE SECTOR</span>
+        <strong id="vf-sector-name">SECTOR 01</strong>
+      </div>
+    </section>
+
+    <section class="vf-layout">
+      <div class="vf-main-column">
+        <div class="vf-statusbar">
+          <div><span>HULL</span><strong id="vf-hull">100</strong></div>
+          <div><span>SHIELD</span><strong id="vf-shield">50</strong></div>
+          <div><span>SALVAGE</span><strong id="vf-salvage">0</strong></div>
+          <div><span>ENERGY</span><strong id="vf-energy">0</strong></div>
+        </div>
+
+        <div class="vf-arena">
+          <canvas id="vf-canvas" width="960" height="600"
+            aria-label="VOID FRONTIER space combat game"></canvas>
+
+          <div class="vf-toast" id="vf-toast" aria-live="polite"></div>
+
+          <div class="vf-overlay" id="vf-overlay">
+            <div class="vf-overlay-panel">
+              <span class="vf-eyebrow" id="vf-overlay-eyebrow">PILOT REGISTRATION</span>
+              <h2 id="vf-overlay-title">THE FRONTIER<br><span>AWAITS.</span></h2>
+              <p id="vf-overlay-text">
+                Hostile drones have been detected. Clear the sector, gather resources, and prepare for the next expedition.
+              </p>
+              <button class="vf-primary-button" id="vf-main-action" type="button">START EXPEDITION</button>
+              <small>Your campaign is saved in this browser.</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="vf-controls">
+          <div class="vf-movement">
+            <button type="button" data-vf-key="up" aria-label="Move up">↑</button>
+            <div>
+              <button type="button" data-vf-key="left" aria-label="Move left">←</button>
+              <button type="button" data-vf-key="down" aria-label="Move down">↓</button>
+              <button type="button" data-vf-key="right" aria-label="Move right">→</button>
+            </div>
+          </div>
+          <div class="vf-touch-note">
+            <strong>FLIGHT CONTROLS</strong>
+            <span>WASD / ARROWS TO MOVE</span>
+            <span>SPACE TO FIRE</span>
+          </div>
+          <button type="button" class="vf-fire-button" id="vf-touch-fire">FIRE WEAPONS</button>
+          <button
+            type="button"
+            id="vf-sound-toggle"
+            class="vf-sound-toggle"
+            aria-pressed="true">
+            🔊 SOUND: ON
+          </button>
+        </div>
+
+        <div class="vf-mission">
+          <div class="vf-mission-top">
+            <div>
+              <span class="vf-eyebrow">CURRENT OBJECTIVE</span>
+              <h2 id="vf-mission-title">Clear hostile contacts</h2>
+            </div>
+            <strong id="vf-kill-count">0 / 8</strong>
+          </div>
+          <div class="vf-progress"><div id="vf-progress-fill"></div></div>
+          <p id="vf-mission-description">Destroy hostile drones to secure this sector.</p>
+        </div>
+      </div>
+
+      <aside class="vf-sidebar">
+        <section class="vf-card vf-pilot-card">
+          <span class="vf-eyebrow">PILOT RECORD</span>
+          <div class="vf-pilot-row">
+            <div class="vf-avatar">VF</div>
+            <div><strong>Frontier Pilot</strong><span id="vf-rank">Recruit</span></div>
+          </div>
+          <div class="vf-record-row"><span>Sectors unlocked</span><strong id="vf-unlocked">1</strong></div>
+          <div class="vf-record-row"><span>Lifetime kills</span><strong id="vf-total-kills">0</strong></div>
+          <div class="vf-record-row"><span>Best sector score</span><strong id="vf-best-score">0</strong></div>
+        </section>
+
+        <section class="vf-card">
+          <div class="vf-section-heading">
+            <div><span class="vf-eyebrow">SHIP SYSTEMS</span><h2>Upgrade bay</h2></div>
+            <span class="vf-mini-tag">PERMANENT</span>
+          </div>
+          <p class="vf-card-description">Spend salvage to improve your ship. Upgrades remain unlocked between expeditions.</p>
+
+          <div class="vf-upgrade">
+            <div class="vf-upgrade-icon">⌁</div>
+            <div class="vf-upgrade-copy">
+              <strong>Weapon array</strong>
+              <span id="vf-weapon-level">Level 1 · Faster fire</span>
+              <small id="vf-weapon-cost">Cost: 30 salvage</small>
+            </div>
+            <button type="button" data-upgrade="weapon" aria-label="Upgrade weapons">+</button>
+          </div>
+
+          <div class="vf-upgrade">
+            <div class="vf-upgrade-icon">◇</div>
+            <div class="vf-upgrade-copy">
+              <strong>Shield generator</strong>
+              <span id="vf-shield-level">Level 1 · More shield</span>
+              <small id="vf-shield-cost">Cost: 25 salvage</small>
+            </div>
+            <button type="button" data-upgrade="shield" aria-label="Upgrade shield">+</button>
+          </div>
+
+          <div class="vf-upgrade">
+            <div class="vf-upgrade-icon">»</div>
+            <div class="vf-upgrade-copy">
+              <strong>Engine drive</strong>
+              <span id="vf-engine-level">Level 1 · Faster movement</span>
+              <small id="vf-engine-cost">Cost: 25 salvage</small>
+            </div>
+            <button type="button" data-upgrade="engine" aria-label="Upgrade engine">+</button>
+          </div>
+        </section>
+
+        <section class="vf-card">
+          <div class="vf-section-heading">
+            <div><span class="vf-eyebrow">STAR CHART</span><h2>Frontier sectors</h2></div>
+          </div>
+          <div id="vf-sector-list" class="vf-sector-list"></div>
+          <p class="vf-card-description">Complete the current sector to unlock the next destination.</p>
+        </section>
+
+        <button type="button" id="vf-reset" class="vf-reset-button">
+          RESET CAMPAIGN
+        </button>
+        <p class="vf-reset-warning">Reset permanently erases this browser's campaign save.</p>
+      </aside>
+    </section>
+
+    <footer class="vf-footer">
+      <span>VOID ARCADE / FRONTIER SYSTEMS</span>
+      <span>EXPLORE. ADAPT. SURVIVE.</span>
+    </footer>
+  </main>
+
+  <dialog id="vf-reset-dialog" class="vf-dialog">
+    <form method="dialog">
+      <h2>Reset campaign?</h2>
+      <p>Your sector progress, salvage, upgrades and records will be erased from this browser.</p>
+      <div class="vf-dialog-actions">
+        <button value="cancel" class="vf-secondary-button">Keep campaign</button>
+        <button value="reset" class="vf-danger-button">Erase save</button>
+      </div>
+    </form>
+  </dialog>
+</body>
+</html>

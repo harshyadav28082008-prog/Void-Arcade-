@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#070b12">
+    <meta name="description" content="VOID BREACH — a futuristic circuit hacking puzzle game.">
+    <title>VOID BREACH | VOID ARCADE</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="app">
+        <header class="topbar">
+            <a class="back-link" href="../../../index.html">
+                ← VOID ARCADE
+            </a>
+            <div class="brand">
+                <span class="brand-mark">V//</span>
+                <span>VOID BREACH</span>
+            </div>
+            <button id="sound-button" class="icon-button"
+                    aria-label="Toggle sound" title="Toggle sound">
+                SOUND: ON
+            </button>
+        </header>
+
+        <section id="menu-screen" class="screen menu-screen">
+            <div class="eyebrow">SECURE NETWORK // ACCESS TERMINAL</div>
+            <h1>BREAK THE<br><span>FIREWALL.</span></h1>
+            <p class="intro-text">
+                Connect the source to the core. Bypass security.
+                Complete the breach before the system locks down.
+            </p>
+
+            <div class="menu-panel">
+                <div class="panel-heading">INITIALIZE BREACH</div>
+
+                <label for="difficulty-select">SECURITY LEVEL</label>
+                <select id="difficulty-select">
+                    <option value="easy">LEVEL 01 — BASIC</option>
+                    <option value="normal">LEVEL 02 — ENCRYPTED</option>
+                    <option value="hard">LEVEL 03 — RESTRICTED</option>
+                </select>
+
+                <button id="start-button" class="primary-button">
+                    START BREACH <span>→</span>
+                </button>
+
+                <button id="continue-button" class="secondary-button">
+                    CONTINUE SAVED SESSION
+                </button>
+
+                <button id="instructions-button" class="text-button">
+                    HOW TO PLAY
+                </button>
+            </div>
+
+            <div class="menu-stats">
+                <div><span>BREACHES</span><strong id="menu-completed">0</strong></div>
+                <div><span>BEST SCORE</span><strong id="menu-best">0</strong></div>
+            </div>
+        </section>
+
+        <section id="instructions-screen" class="screen hidden">
+            <div class="eyebrow">FIELD MANUAL // 001</div>
+            <h2>HOW TO PLAY</h2>
+            <div class="info-panel">
+                <p><strong>01 / CONNECT</strong><br>
+                    Create a continuous circuit from SOURCE to CORE.</p>
+                <p><strong>02 / ROTATE</strong><br>
+                    Tap a circuit tile to rotate its connections.</p>
+                <p><strong>03 / OPTIMIZE</strong><br>
+                    Finish quickly and use as few moves as possible.</p>
+                <p><strong>04 / BREACH</strong><br>
+                    Complete the network before time expires.</p>
+            </div>
+            <button id="instructions-back" class="primary-button">
+                RETURN TO MENU
+            </button>
+        </section>
+
+        <section id="game-screen" class="screen hidden">
+            <div class="game-heading">
+                <div>
+                    <div class="eyebrow">ACTIVE INTRUSION</div>
+                    <h2 id="level-title">BREACH 001</h2>
+                </div>
+                <div id="connection-status" class="connection-status">
+                    DISCONNECTED
+                </div>
+            </div>
+
+            <div class="stats-bar">
+                <div><span>TIME</span><strong id="timer">00:00</strong></div>
+                <div><span>MOVES</span><strong id="moves">0</strong></div>
+                <div><span>LEVEL</span><strong id="level-number">01</strong></div>
+            </div>
+
+            <div class="board-frame">
+                <div class="board-caption">
+                    <span>NETWORK GRID</span>
+                    <span id="grid-size">5 × 5</span>
+                </div>
+                <div id="puzzle-board" class="puzzle-board"
+                     role="group" aria-label="Circuit puzzle"></div>
+            </div>
+
+            <div class="game-actions">
+                <button id="hint-button" class="secondary-button">HINT</button>
+                <button id="pause-button" class="secondary-button">PAUSE</button>
+                <button id="restart-button" class="secondary-button">RESTART</button>
+            </div>
+
+            <p id="game-message" class="game-message" aria-live="polite">
+                Establish a route from SOURCE to CORE.
+            </p>
+        </section>
+
+        <section id="pause-screen" class="screen hidden">
+            <div class="eyebrow">CONNECTION SUSPENDED</div>
+            <h2>BREACH PAUSED</h2>
+            <p>Your current session is waiting.</p>
+            <button id="resume-button" class="primary-button">
+                RESUME BREACH
+            </button>
+            <button id="pause-menu-button" class="secondary-button">
+                EXIT TO MENU
+            </button>
+        </section>
+
+        <section id="result-screen" class="screen hidden">
+            <div class="eyebrow" id="result-eyebrow">SYSTEM RESPONSE</div>
+            <h2 id="result-title">BREACH COMPLETE</h2>
+            <p id="result-message">The core is connected.</p>
+
+            <div class="result-stats">
+                <div><span>SCORE</span><strong id="result-score">0</strong></div>
+                <div><span>TIME</span><strong id="result-time">00:00</strong></div>
+                <div><span>MOVES</span><strong id="result-moves">0</strong></div>
+            </div>
+
+            <button id="next-button" class="primary-button">
+                NEXT BREACH →
+            </button>
+            <button id="retry-button" class="secondary-button">
+                RETRY
+            </button>
+            <button id="result-menu-button" class="text-button">
+                RETURN TO MENU
+            </button>
+        </section>
+
+        <footer class="footer">
+            <span>VOID ARCADE</span>
+            <span>UNAUTHORIZED ACCESS IS THE POINT.</span>
+        </footer>
+    </main>
+
+    <script src="game.js"></script>
+</body>
+</html>
